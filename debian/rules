@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+clean:
+	dh_clean
+	@# Do nothing
+
+build:
+	@
+	
+
+binary:
+	mkdir -p debian/hdstress
+	mkdir -p debian/hdstress/usr/bin
+	install -m 755 build/hdstress debian/hdstress/usr/bin/
+	dh_installman
+	dh_gencontrol
+	dh_builddeb
+	

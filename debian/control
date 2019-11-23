@@ -1,0 +1,9 @@
+Source: hdstress
+Maintainer: Paulino Ruiz de Clavijo Vázquez <pruiz@us.es>
+
+Package: hdstress
+Section: utils
+Version: 0.1
+Architecture: all
+Depends: python3
+Description: Tool to tests HDDs, SDDs, flash memories, etc.

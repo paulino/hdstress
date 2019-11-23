@@ -1,0 +1,72 @@
+.TH "hdstress" "1" "12 Nov 2019"
+.SH NAME
+hdstress small tool to test HDDs/SDDs
+.SH SYNOPSIS
+.B hdstress
+[OPTIONS] PATH
+.SH DESCRIPTION
+hdstress is an small tool to write files into a file system with a
+pattern and verify written files after.
+
+.PP
+It can run two modes: single job or multithread. The recommended mode used  depends of the kind of device: HDD/SDD/Flash. An advanced options allows to stress the device with random reads at random locations.
+
+.SH "USAGE"
+.PP
+To use hdstress in a easy way to test a device you only must add the path
+where it is mounted as parameter:
+
+.PP
+.RS
+\f(CWhdstress /mnt/test
+.RE
+
+This command creates 100MByte files until /mnt/test drive is full using an
+single job. Then reads files contents and verifying the pattern written previouly. It is like a sequential  write and read.
+
+To stress a drive (recommended only for HDD) you can use the following
+
+.PP
+.RS
+\f(CWhdstress -j 20 -s 1 /mnt/test
+.RE
+
+This command creates 1MByte files until /mnt/test is full. Files are written using 20 threads. Then all files are read to verify the written pattern, the read operation runs 20 threads reading the files in a random order.
+
+.SH "DISCUSSION"
+
+This tool does not avoid the system cache thus it is only effective for large filesystem where the write pass oversize the memory cache making the read pass access to the device.
+
+.SH "OPTIONS"
+
+.PP
+Summary of the options available in hdstress.
+.TP
+.B \-t SIZE, \-\-test\-size SIZE
+Test size in GiB. Limits the space used for the test.
+.TP
+.B \-s SIZE, \-\-file\-size SIZE
+File size in MB used during the test. Small files joined
+with a high number of concurrent thread stresses the devices.
+.TP
+.B \-j N, \-\-jobs\-size N
+Number of concurrent writes and reads.
+.TP
+.B \-2
+Only verify created files in a previous run
+
+.SS "Exit status:"
+.TP
+0
+if ok
+.TP
+255
+Something went wrong
+
+.SH SEE ALSO
+nmon(1)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Paulino Ruiz de Clavijo Vázquez (pruiz@us.es)
+
